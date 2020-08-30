@@ -60,7 +60,7 @@ class MyNavBar extends React.Component {
       return (
         <div>
         <Navbar color="light" light expand="md">
-          <NavbarBrand href="/">Birb Watcher</NavbarBrand>
+          <NavbarBrand href="/"><i className="fab fa-earlybirds fa-lg"></i>Birb Watcher</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={isOpen} navbar>
             {buildNavbar()}
