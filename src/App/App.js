@@ -5,9 +5,9 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <h2>Scat-Surprise</h2>
+        <h2>Birb Watcher</h2>
         <button className="btn btn-secondary">
-        <i class="fas fa-poo"></i>
+        <i className="fab fa-earlybirds fa-lg"></i>
           </button>
       </div>
     );
