@@ -1,20 +1,36 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+
+// import { auth } from 'firebase';
+import authData from '../../../helpers/data/authData';
+import birbsData from '../../../helpers/data/birbsData';
+import BirbCard from '../../shared/BirbCard/BirbCard';
+
+// go get all birbs by uid (convert firebaseCollection helper)
+// create birbData helper getBirbByUid
+// getUid function for current user
+// set state : [], then fill with birbs => componentDidMount
+// map over birbs (pass birb as props) and create birb cards down in render
+// make birb card component
+// prop types for birbShape
 
 class Home extends React.Component {
-    editBirbEvent = (e) => {
-      e.preventDefault();
-      const birbId = 'birb10000';
-      this.props.history.push(`/edit/${birbId}`);
+    state = {
+      birbs: [],
+    }
+
+    componentDidMount() {
+      birbsData.getBirbsByUid(authData.getUid())
+        .then((birbs) => this.setState({ birbs }))
+        .catch((err) => console.error('get birbs broke', err));
     }
 
     render() {
+      const { birbs } = this.state;
+
+      const birbCards = birbs.map((birb) => <BirbCard key={birb.id} birb={birb} />);
       return (
       <div className="Home">
-        <h1>Home</h1>
-        <button className="btn btn-dark" onClick={this.editBirbEvent}>Edit A Birb</button>
-        <Link to='/new'>New Birb</Link>
-        <h2> Hey here is a link to a link to a <Link to='/birbs/birb12344556'>Specific Birb</Link></h2>
+        {birbCards}
       </div>
       );
     }
