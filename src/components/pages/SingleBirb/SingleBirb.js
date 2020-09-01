@@ -1,6 +1,19 @@
 import React from 'react';
+import birbsData from '../../../helpers/data/birbsData';
 
 class SingleBirb extends React.Component {
+  state = {
+    birb: {},
+  }
+
+  componentDidMount() {
+    const { birbId } = this.props.match.params;
+
+    birbsData.getBirbById(birbId)
+      .then((res) => this.setState({ birb: res.data }))
+      .catch((err) => console.error('get birb borked', err));
+  }
+
   render() {
     return (
       <div className="SingleBirb">
